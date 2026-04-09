@@ -16,6 +16,8 @@ export async function generateMetadata({ params }: SensorPageProps): Promise<Met
 }
 
 export default async function SensorPage({ params }: SensorPageProps) {
+	await new Promise((resolve) => setTimeout(resolve, 750));
+
 	const { id } = await params;
 
 	return (
