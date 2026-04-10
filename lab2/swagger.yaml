@@ -1,0 +1,171 @@
+openapi: 3.0.3
+info:
+  title: ClipSphere API
+  version: 1.0.0
+  description: API documentation for ClipSphere videos, authentication, and comments.
+servers:
+  - url: http://localhost:5000
+paths:
+  /api/videos:
+    get:
+      summary: Get all videos
+      description: Returns videos with filtering, sorting, and pagination.
+      tags:
+        - Videos
+      parameters:
+        - in: query
+          name: page
+          schema:
+            type: integer
+            default: 1
+        - in: query
+          name: limit
+          schema:
+            type: integer
+            default: 10
+        - in: query
+          name: sort
+          schema:
+            type: string
+            example: -createdAt
+      responses:
+        '200':
+          description: Videos fetched successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VideosResponse'
+  /api/videos/{id}:
+    get:
+      summary: Get video by ID
+      tags:
+        - Videos
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Video fetched successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VideoResponse'
+        '404':
+          description: Video not found
+  /api/videos/{videoId}/comments:
+    post:
+      summary: Add comment to a video
+      tags:
+        - Comments
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: videoId
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - text
+              properties:
+                text:
+                  type: string
+                  example: Great video!
+      responses:
+        '201':
+          description: Comment added successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommentResponse'
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+  schemas:
+    User:
+      type: object
+      properties:
+        _id:
+          type: string
+        name:
+          type: string
+        email:
+          type: string
+          format: email
+    Video:
+      type: object
+      properties:
+        _id:
+          type: string
+        title:
+          type: string
+        description:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        user:
+          $ref: '#/components/schemas/User'
+    Comment:
+      type: object
+      properties:
+        _id:
+          type: string
+        text:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        user:
+          $ref: '#/components/schemas/User'
+        video:
+          type: string
+    VideosResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+          example: true
+        results:
+          type: integer
+        data:
+          type: object
+          properties:
+            videos:
+              type: array
+              items:
+                $ref: '#/components/schemas/Video'
+    VideoResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+          example: true
+        data:
+          type: object
+          properties:
+            video:
+              $ref: '#/components/schemas/Video'
+    CommentResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+          example: true
+        data:
+          type: object
+          properties:
+            comment:
+              $ref: '#/components/schemas/Comment'

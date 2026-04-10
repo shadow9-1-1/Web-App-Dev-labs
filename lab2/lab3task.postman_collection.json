@@ -1,0 +1,690 @@
+﻿{
+    "info":  {
+                 "_postman_id":  "8b730de3-4fda-4586-b9c7-205d53433ee4",
+                 "name":  "lab3task Updated",
+                 "schema":  "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+                 "_exporter_id":  "40425670"
+             },
+    "item":  [
+                 {
+                     "name":  "New Request",
+                     "request":  {
+                                     "method":  "POST",
+                                     "header":  [
+
+                                                ],
+                                     "body":  {
+                                                  "mode":  "raw",
+                                                  "raw":  "{\r\n    \"name\": \"shadow\",\r\n    \"email\": \"shadow@mail.com\",\r\n    \"password\": \"password123\"\r\n}",
+                                                  "options":  {
+                                                                  "raw":  {
+                                                                              "language":  "json"
+                                                                          }
+                                                              }
+                                              },
+                                     "url":  {
+                                                 "raw":  "{{base url}}/api/auth/signup",
+                                                 "protocol":  null,
+                                                 "host":  [
+                                                              "{{base url}}"
+                                                          ],
+                                                 "port":  null,
+                                                 "path":  [
+                                                              "api",
+                                                              "auth",
+                                                              "signup"
+                                                          ]
+                                             }
+                                 },
+                     "response":  [
+
+                                  ],
+                     "event":  [
+                                   {
+                                       "listen":  "test",
+                                       "script":  {
+                                                      "type":  "text/javascript",
+                                                      "exec":  [
+                                                                   "pm.test(\u0027Status code is 201\u0027, function () { pm.response.to.have.status(201); });",
+                                                                   "var body = pm.response.json();",
+                                                                   "if (body.token) { pm.collectionVariables.set(\u0027token\u0027, body.token); }"
+                                                               ]
+                                                  }
+                                   }
+                               ]
+                 },
+                 {
+                     "name":  "http://localhost:5000/api/auth/login",
+                     "request":  {
+                                     "auth":  {
+                                                  "type":  "noauth"
+                                              },
+                                     "method":  "POST",
+                                     "header":  [
+
+                                                ],
+                                     "body":  {
+                                                  "mode":  "raw",
+                                                  "raw":  "{\r\n    \"email\": \"shadow@mail.com\",\r\n    \"password\": \"password123\"\r\n}",
+                                                  "options":  {
+                                                                  "raw":  {
+                                                                              "language":  "json"
+                                                                          }
+                                                              }
+                                              },
+                                     "url":  {
+                                                 "raw":  "{{base url}}/api/auth/login",
+                                                 "protocol":  null,
+                                                 "host":  [
+                                                              "{{base url}}"
+                                                          ],
+                                                 "port":  null,
+                                                 "path":  [
+                                                              "api",
+                                                              "auth",
+                                                              "login"
+                                                          ]
+                                             }
+                                 },
+                     "response":  [
+
+                                  ],
+                     "event":  [
+                                   {
+                                       "listen":  "test",
+                                       "script":  {
+                                                      "type":  "text/javascript",
+                                                      "exec":  [
+                                                                   "pm.test(\u0027Status code is 200\u0027, function () { pm.response.to.have.status(200); });",
+                                                                   "var body = pm.response.json();",
+                                                                   "if (body.token) { pm.collectionVariables.set(\u0027token\u0027, body.token); }"
+                                                               ]
+                                                  }
+                                   }
+                               ]
+                 },
+                 {
+                     "name":  "http://localhost:5000/api/auth/me",
+                     "request":  {
+                                     "auth":  {
+                                                  "type":  "bearer",
+                                                  "bearer":  [
+                                                                 {
+                                                                     "key":  "token",
+                                                                     "value":  "{{token}}",
+                                                                     "type":  "string"
+                                                                 }
+                                                             ]
+                                              },
+                                     "method":  "GET",
+                                     "header":  [
+
+                                                ],
+                                     "url":  {
+                                                 "raw":  "{{base url}}/api/auth/me",
+                                                 "protocol":  null,
+                                                 "host":  [
+                                                              "{{base url}}"
+                                                          ],
+                                                 "port":  null,
+                                                 "path":  [
+                                                              "api",
+                                                              "auth",
+                                                              "me"
+                                                          ]
+                                             }
+                                 },
+                     "response":  [
+
+                                  ]
+                 },
+                 {
+                     "name":  "Filtering",
+                     "request":  {
+                                     "auth":  {
+                                                  "type":  "bearer",
+                                                  "bearer":  [
+                                                                 {
+                                                                     "key":  "token",
+                                                                     "value":  "{{token}}",
+                                                                     "type":  "string"
+                                                                 }
+                                                             ]
+                                              },
+                                     "method":  "GET",
+                                     "header":  [
+
+                                                ],
+                                     "url":  {
+                                                 "raw":  "{{base url}}/api/videos?title=MyVideo",
+                                                 "protocol":  null,
+                                                 "host":  [
+                                                              "{{base url}}"
+                                                          ],
+                                                 "port":  null,
+                                                 "path":  [
+                                                              "api",
+                                                              "videos"
+                                                          ],
+                                                 "query":  [
+                                                               {
+                                                                   "key":  "title",
+                                                                   "value":  "MyVideo"
+                                                               }
+                                                           ]
+                                             }
+                                 },
+                     "response":  [
+
+                                  ],
+                     "event":  [
+                                   {
+                                       "listen":  "test",
+                                       "script":  {
+                                                      "type":  "text/javascript",
+                                                      "exec":  [
+                                                                   "pm.test(\u0027Status code is 200\u0027, function () { pm.response.to.have.status(200); });",
+                                                                   "pm.test(\u0027Response time is under 2000ms\u0027, function () { pm.expect(pm.response.responseTime).to.be.below(2000); });",
+                                                                   "var body = pm.response.json();",
+                                                                   "pm.test(\u0027Response structure is valid\u0027, function () {",
+                                                                   "  pm.expect(body).to.have.property(\u0027success\u0027, true);",
+                                                                   "  pm.expect(body).to.have.property(\u0027data\u0027);",
+                                                                   "  pm.expect(body.data).to.have.property(\u0027videos\u0027);",
+                                                                   "  pm.expect(body.data.videos).to.be.an(\u0027array\u0027);",
+                                                                   "});"
+                                                               ]
+                                                  }
+                                   }
+                               ]
+                 },
+                 {
+                     "name":  "Pagination",
+                     "request":  {
+                                     "auth":  {
+                                                  "type":  "bearer",
+                                                  "bearer":  [
+                                                                 {
+                                                                     "key":  "token",
+                                                                     "value":  "{{token}}",
+                                                                     "type":  "string"
+                                                                 }
+                                                             ]
+                                              },
+                                     "method":  "GET",
+                                     "header":  [
+
+                                                ],
+                                     "url":  {
+                                                 "raw":  "{{base url}}/api/videos?page=1\u0026limit=5",
+                                                 "protocol":  null,
+                                                 "host":  [
+                                                              "{{base url}}"
+                                                          ],
+                                                 "port":  null,
+                                                 "path":  [
+                                                              "api",
+                                                              "videos"
+                                                          ],
+                                                 "query":  [
+                                                               {
+                                                                   "key":  "page",
+                                                                   "value":  "1"
+                                                               },
+                                                               {
+                                                                   "key":  "limit",
+                                                                   "value":  "5"
+                                                               }
+                                                           ]
+                                             }
+                                 },
+                     "response":  [
+
+                                  ],
+                     "event":  [
+                                   {
+                                       "listen":  "test",
+                                       "script":  {
+                                                      "type":  "text/javascript",
+                                                      "exec":  [
+                                                                   "pm.test(\u0027Status code is 200\u0027, function () { pm.response.to.have.status(200); });",
+                                                                   "pm.test(\u0027Response time is under 2000ms\u0027, function () { pm.expect(pm.response.responseTime).to.be.below(2000); });",
+                                                                   "var body = pm.response.json();",
+                                                                   "pm.test(\u0027Response structure is valid\u0027, function () {",
+                                                                   "  pm.expect(body).to.have.property(\u0027success\u0027, true);",
+                                                                   "  pm.expect(body).to.have.property(\u0027data\u0027);",
+                                                                   "  pm.expect(body.data).to.have.property(\u0027videos\u0027);",
+                                                                   "  pm.expect(body.data.videos).to.be.an(\u0027array\u0027);",
+                                                                   "});"
+                                                               ]
+                                                  }
+                                   }
+                               ]
+                 },
+                 {
+                     "name":  "GET Comments",
+                     "request":  {
+                                     "auth":  {
+                                                  "type":  "bearer",
+                                                  "bearer":  [
+                                                                 {
+                                                                     "key":  "token",
+                                                                     "value":  "{{token}}",
+                                                                     "type":  "string"
+                                                                 }
+                                                             ]
+                                              },
+                                     "method":  "GET",
+                                     "header":  [
+
+                                                ],
+                                     "url":  {
+                                                 "raw":  "{{base url}}/api/videos/:videoId/comments",
+                                                 "protocol":  null,
+                                                 "host":  [
+                                                              "{{base url}}"
+                                                          ],
+                                                 "port":  null,
+                                                 "path":  [
+                                                              "api",
+                                                              "videos",
+                                                              ":videoId",
+                                                              "comments"
+                                                          ],
+                                                 "variable":  [
+                                                                  {
+                                                                      "key":  "videoId",
+                                                                      "value":  "69b28fa6f1dee4a45d547e26"
+                                                                  }
+                                                              ]
+                                             }
+                                 },
+                     "response":  [
+
+                                  ]
+                 },
+                 {
+                     "name":  "POST Comments",
+                     "request":  {
+                                     "auth":  {
+                                                  "type":  "bearer",
+                                                  "bearer":  [
+                                                                 {
+                                                                     "key":  "token",
+                                                                     "value":  "{{token}}",
+                                                                     "type":  "string"
+                                                                 }
+                                                             ]
+                                              },
+                                     "method":  "POST",
+                                     "header":  [
+
+                                                ],
+                                     "body":  {
+                                                  "mode":  "raw",
+                                                  "raw":  "{\r\n    \"text\":\"2 comment on MyVideo5\"\r\n}",
+                                                  "options":  {
+                                                                  "raw":  {
+                                                                              "language":  "json"
+                                                                          }
+                                                              }
+                                              },
+                                     "url":  {
+                                                 "raw":  "{{base url}}/api/videos/:videoId/comments",
+                                                 "protocol":  null,
+                                                 "host":  [
+                                                              "{{base url}}"
+                                                          ],
+                                                 "port":  null,
+                                                 "path":  [
+                                                              "api",
+                                                              "videos",
+                                                              ":videoId",
+                                                              "comments"
+                                                          ],
+                                                 "variable":  [
+                                                                  {
+                                                                      "key":  "videoId",
+                                                                      "value":  "69b28fa6f1dee4a45d547e26"
+                                                                  }
+                                                              ]
+                                             }
+                                 },
+                     "response":  [
+
+                                  ],
+                     "event":  [
+                                   {
+                                       "listen":  "test",
+                                       "script":  {
+                                                      "type":  "text/javascript",
+                                                      "exec":  [
+                                                                   "pm.test(\u0027Status code is 201\u0027, function () { pm.response.to.have.status(201); });",
+                                                                   "var body = pm.response.json();",
+                                                                   "if (body.data \u0026\u0026 body.data.comment \u0026\u0026 body.data.comment._id) { pm.collectionVariables.set(\u0027commentId\u0027, body.data.comment._id); }"
+                                                               ]
+                                                  }
+                                   }
+                               ]
+                 },
+                 {
+                     "name":  "DELETE Comments",
+                     "request":  {
+                                     "auth":  {
+                                                  "type":  "bearer",
+                                                  "bearer":  [
+                                                                 {
+                                                                     "key":  "token",
+                                                                     "value":  "{{token}}",
+                                                                     "type":  "string"
+                                                                 }
+                                                             ]
+                                              },
+                                     "method":  "DELETE",
+                                     "header":  [
+
+                                                ],
+                                     "body":  {
+                                                  "mode":  "raw",
+                                                  "raw":  "",
+                                                  "options":  {
+                                                                  "raw":  {
+                                                                              "language":  "json"
+                                                                          }
+                                                              }
+                                              },
+                                     "url":  {
+                                                 "raw":  "{{base url}}/api/videos/:videoId/comments/:commentId",
+                                                 "protocol":  null,
+                                                 "host":  [
+                                                              "{{base url}}"
+                                                          ],
+                                                 "port":  null,
+                                                 "path":  [
+                                                              "api",
+                                                              "videos",
+                                                              ":videoId",
+                                                              "comments",
+                                                              ":commentId"
+                                                          ],
+                                                 "variable":  [
+                                                                  {
+                                                                      "key":  "videoId",
+                                                                      "value":  "69b28fa6f1dee4a45d547e26"
+                                                                  },
+                                                                  {
+                                                                      "key":  "commentId",
+                                                                      "value":  "69b291c6f1dee4a45d547e3c"
+                                                                  }
+                                                              ]
+                                             }
+                                 },
+                     "response":  [
+
+                                  ]
+                 },
+                 {
+                     "name":  "Update Comments",
+                     "request":  {
+                                     "auth":  {
+                                                  "type":  "bearer",
+                                                  "bearer":  [
+                                                                 {
+                                                                     "key":  "token",
+                                                                     "value":  "{{token}}",
+                                                                     "type":  "string"
+                                                                 }
+                                                             ]
+                                              },
+                                     "method":  "PUT",
+                                     "header":  [
+
+                                                ],
+                                     "body":  {
+                                                  "mode":  "raw",
+                                                  "raw":  "{\r\n    \"text\":\"2 comment on MyVideo5 Update\"\r\n}",
+                                                  "options":  {
+                                                                  "raw":  {
+                                                                              "language":  "json"
+                                                                          }
+                                                              }
+                                              },
+                                     "url":  {
+                                                 "raw":  "{{base url}}/api/videos/:videoId/comments/:commentId",
+                                                 "protocol":  null,
+                                                 "host":  [
+                                                              "{{base url}}"
+                                                          ],
+                                                 "port":  null,
+                                                 "path":  [
+                                                              "api",
+                                                              "videos",
+                                                              ":videoId",
+                                                              "comments",
+                                                              ":commentId"
+                                                          ],
+                                                 "variable":  [
+                                                                  {
+                                                                      "key":  "videoId",
+                                                                      "value":  "69b28fa6f1dee4a45d547e26"
+                                                                  },
+                                                                  {
+                                                                      "key":  "commentId",
+                                                                      "value":  "69b29384f1dee4a45d547e51"
+                                                                  }
+                                                              ]
+                                             }
+                                 },
+                     "response":  [
+
+                                  ]
+                 },
+                 {
+                     "name":  "Combined",
+                     "request":  {
+                                     "auth":  {
+                                                  "type":  "bearer",
+                                                  "bearer":  [
+                                                                 {
+                                                                     "key":  "token",
+                                                                     "value":  "{{token}}",
+                                                                     "type":  "string"
+                                                                 }
+                                                             ]
+                                              },
+                                     "method":  "GET",
+                                     "header":  [
+
+                                                ],
+                                     "url":  {
+                                                 "raw":  "{{base url}}/api/videos?sort=-createdAt\u0026page=1\u0026limit=10",
+                                                 "protocol":  null,
+                                                 "host":  [
+                                                              "{{base url}}"
+                                                          ],
+                                                 "port":  null,
+                                                 "path":  [
+                                                              "api",
+                                                              "videos"
+                                                          ],
+                                                 "query":  [
+                                                               {
+                                                                   "key":  "sort",
+                                                                   "value":  "-createdAt"
+                                                               },
+                                                               {
+                                                                   "key":  "page",
+                                                                   "value":  "1"
+                                                               },
+                                                               {
+                                                                   "key":  "limit",
+                                                                   "value":  "10"
+                                                               }
+                                                           ]
+                                             }
+                                 },
+                     "response":  [
+
+                                  ],
+                     "event":  [
+                                   {
+                                       "listen":  "test",
+                                       "script":  {
+                                                      "type":  "text/javascript",
+                                                      "exec":  [
+                                                                   "pm.test(\u0027Status code is 200\u0027, function () { pm.response.to.have.status(200); });",
+                                                                   "pm.test(\u0027Response time is under 2000ms\u0027, function () { pm.expect(pm.response.responseTime).to.be.below(2000); });",
+                                                                   "var body = pm.response.json();",
+                                                                   "pm.test(\u0027Response structure is valid\u0027, function () {",
+                                                                   "  pm.expect(body).to.have.property(\u0027success\u0027, true);",
+                                                                   "  pm.expect(body).to.have.property(\u0027data\u0027);",
+                                                                   "  pm.expect(body.data).to.have.property(\u0027videos\u0027);",
+                                                                   "  pm.expect(body.data.videos).to.be.an(\u0027array\u0027);",
+                                                                   "});"
+                                                               ]
+                                                  }
+                                   }
+                               ]
+                 },
+                 {
+                     "name":  "Sorting",
+                     "request":  {
+                                     "auth":  {
+                                                  "type":  "bearer",
+                                                  "bearer":  [
+                                                                 {
+                                                                     "key":  "token",
+                                                                     "value":  "{{token}}",
+                                                                     "type":  "string"
+                                                                 }
+                                                             ]
+                                              },
+                                     "method":  "GET",
+                                     "header":  [
+
+                                                ],
+                                     "url":  {
+                                                 "raw":  "{{base url}}/api/videos?sort=-createdAt",
+                                                 "protocol":  null,
+                                                 "host":  [
+                                                              "{{base url}}"
+                                                          ],
+                                                 "port":  null,
+                                                 "path":  [
+                                                              "api",
+                                                              "videos"
+                                                          ],
+                                                 "query":  [
+                                                               {
+                                                                   "key":  "sort",
+                                                                   "value":  "-createdAt"
+                                                               }
+                                                           ]
+                                             }
+                                 },
+                     "response":  [
+
+                                  ],
+                     "event":  [
+                                   {
+                                       "listen":  "test",
+                                       "script":  {
+                                                      "type":  "text/javascript",
+                                                      "exec":  [
+                                                                   "pm.test(\u0027Status code is 200\u0027, function () { pm.response.to.have.status(200); });",
+                                                                   "pm.test(\u0027Response time is under 2000ms\u0027, function () { pm.expect(pm.response.responseTime).to.be.below(2000); });",
+                                                                   "var body = pm.response.json();",
+                                                                   "pm.test(\u0027Response structure is valid\u0027, function () {",
+                                                                   "  pm.expect(body).to.have.property(\u0027success\u0027, true);",
+                                                                   "  pm.expect(body).to.have.property(\u0027data\u0027);",
+                                                                   "  pm.expect(body.data).to.have.property(\u0027videos\u0027);",
+                                                                   "  pm.expect(body.data.videos).to.be.an(\u0027array\u0027);",
+                                                                   "});"
+                                                               ]
+                                                  }
+                                   }
+                               ]
+                 },
+                 {
+                     "name":  "http://localhost:5000/api/videos",
+                     "request":  {
+                                     "auth":  {
+                                                  "type":  "bearer",
+                                                  "bearer":  [
+                                                                 {
+                                                                     "key":  "token",
+                                                                     "value":  "{{token}}",
+                                                                     "type":  "string"
+                                                                 }
+                                                             ]
+                                              },
+                                     "method":  "POST",
+                                     "header":  [
+
+                                                ],
+                                     "body":  {
+                                                  "mode":  "raw",
+                                                  "raw":  "{\r\n    \"title\": \"MyVideo5\",\r\n    \"description\": \"This is a test video\"\r\n}",
+                                                  "options":  {
+                                                                  "raw":  {
+                                                                              "language":  "json"
+                                                                          }
+                                                              }
+                                              },
+                                     "url":  {
+                                                 "raw":  "{{base url}}/api/videos",
+                                                 "protocol":  null,
+                                                 "host":  [
+                                                              "{{base url}}"
+                                                          ],
+                                                 "port":  null,
+                                                 "path":  [
+                                                              "api",
+                                                              "videos"
+                                                          ]
+                                             }
+                                 },
+                     "response":  [
+
+                                  ],
+                     "event":  [
+                                   {
+                                       "listen":  "test",
+                                       "script":  {
+                                                      "type":  "text/javascript",
+                                                      "exec":  [
+                                                                   "pm.test(\u0027Status code is 201\u0027, function () { pm.response.to.have.status(201); });",
+                                                                   "pm.test(\u0027Response time is under 2000ms\u0027, function () { pm.expect(pm.response.responseTime).to.be.below(2000); });",
+                                                                   "var body = pm.response.json();",
+                                                                   "pm.test(\u0027Response structure is valid\u0027, function () {",
+                                                                   "  pm.expect(body).to.have.property(\u0027success\u0027, true);",
+                                                                   "  pm.expect(body).to.have.property(\u0027data\u0027);",
+                                                                   "  pm.expect(body.data).to.have.property(\u0027video\u0027);",
+                                                                   "  pm.expect(body.data.video).to.have.property(\u0027_id\u0027);",
+                                                                   "  pm.expect(body.data.video).to.have.property(\u0027title\u0027);",
+                                                                   "});",
+                                                                   "if (body.data \u0026\u0026 body.data.video \u0026\u0026 body.data.video._id) { pm.collectionVariables.set(\u0027videoId\u0027, body.data.video._id); }"
+                                                               ]
+                                                  }
+                                   }
+                               ]
+                 }
+             ],
+    "variable":  [
+                     {
+                         "key":  "base url",
+                         "value":  "http://localhost:5000"
+                     },
+                     {
+                         "key":  "token",
+                         "value":  ""
+                     },
+                     {
+                         "key":  "videoId",
+                         "value":  ""
+                     },
+                     {
+                         "key":  "commentId",
+                         "value":  ""
+                     }
+                 ]
+}
