@@ -33,7 +33,17 @@ export async function POST() {
       cancel_url: `${appUrl}/checkout/cancel`,
     });
 
-    return NextResponse.json({ url: session.url }, { status: 200 });
+    if (!session.id) {
+      return NextResponse.json(
+        { error: "Stripe did not return a checkout session ID" },
+        { status: 500 }
+      );
+    }
+
+    return NextResponse.json(
+      { sessionId: session.id, url: session.url },
+      { status: 200 }
+    );
   } catch (error) {
     const message =
       error instanceof Error
