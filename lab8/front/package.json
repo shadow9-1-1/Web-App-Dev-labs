@@ -12,7 +12,8 @@
     "next": "16.2.3",
     "ngrok": "^5.0.0-beta.2",
     "react": "19.2.4",
-    "react-dom": "19.2.4"
+    "react-dom": "19.2.4",
+    "stripe": "^22.0.2"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
