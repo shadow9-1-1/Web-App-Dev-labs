@@ -21,10 +21,10 @@ export async function POST() {
           price_data: {
             currency: "usd",
             product_data: {
-              name: "Premium Ghost Status",
+              name: "Premium Account Status",
               description: "Unlock premium spectral features and priority haunting.",
             },
-            unit_amount: 999,
+            unit_amount: 2000,
           },
           quantity: 1,
         },

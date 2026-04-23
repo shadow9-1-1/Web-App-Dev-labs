@@ -7,7 +7,7 @@ export default function CheckoutButton() {
   const [errorMessage, setErrorMessage] = useState("");
 
   const buttonText = useMemo(
-    () => (isLoading ? "Redirecting..." : "Buy Premium Ghost Status - $9.99"),
+    () => (isLoading ? "Redirecting..." : "Upgrade Now - $20.00"),
     [isLoading]
   );
 
