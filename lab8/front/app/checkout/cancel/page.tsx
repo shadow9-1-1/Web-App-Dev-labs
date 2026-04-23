@@ -7,14 +7,14 @@ export default function CheckoutCancelPage() {
         Checkout Canceled
       </h1>
       <p className="max-w-xl text-base text-zinc-700 dark:text-zinc-300">
-        No payment was captured. You can return to your dashboard and try again
+        No payment was captured. You can return home and try checkout again
         at any time.
       </p>
       <Link
-        href="/dashboard"
+        href="/"
         className="rounded-full bg-black px-6 py-3 text-sm font-semibold text-white transition hover:bg-zinc-800 dark:bg-white dark:text-black dark:hover:bg-zinc-200"
       >
-        Back to Dashboard
+        Back to Home
       </Link>
     </main>
   );

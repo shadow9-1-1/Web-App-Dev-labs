@@ -14,8 +14,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Lab 6 - Next.js",
-  description: "lab 6 - next.js application for web development.",
+  title: "Lab 8 - Stripe Checkout",
+  description: "Lab 8 Stripe checkout and webhook integration.",
 };
 
 export default function RootLayout({
@@ -34,14 +34,8 @@ export default function RootLayout({
             <Link className="hover:text-zinc-900" href="/">
               Home
             </Link>
-            <Link className="hover:text-zinc-900" href="/dashboard">
-              Dashboard
-            </Link>
-            <Link className="hover:text-zinc-900" href="/dashboard/settings">
-              Settings
-            </Link>
-            <Link className="hover:text-zinc-900" href="/sensors">
-              Sensors
+            <Link className="hover:text-zinc-900" href="/checkout/success">
+              Success Page
             </Link>
           </nav>
         </header>

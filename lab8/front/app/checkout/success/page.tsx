@@ -22,10 +22,10 @@ export default async function CheckoutSuccessPage({
         </p>
       ) : null}
       <Link
-        href="/dashboard"
+        href="/"
         className="rounded-full bg-black px-6 py-3 text-sm font-semibold text-white transition hover:bg-zinc-800 dark:bg-white dark:text-black dark:hover:bg-zinc-200"
       >
-        Back to Dashboard
+        Back to Home
       </Link>
     </main>
   );
