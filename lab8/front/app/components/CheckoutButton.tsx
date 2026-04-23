@@ -1,11 +1,6 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { loadStripe } from "@stripe/stripe-js";
-
-const stripePromise = loadStripe(
-  process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY || ""
-);
 
 export default function CheckoutButton() {
   const [isLoading, setIsLoading] = useState(false);
@@ -31,26 +26,15 @@ export default function CheckoutButton() {
 
       const data = (await response.json()) as {
         sessionId?: string;
+        url?: string;
         error?: string;
       };
 
-      if (!response.ok || !data.sessionId) {
+      if (!response.ok || !data.url) {
         throw new Error(data.error || "Failed to create checkout session");
       }
 
-      const stripe = await stripePromise;
-
-      if (!stripe) {
-        throw new Error("Stripe.js failed to initialize");
-      }
-
-      const { error } = await stripe.redirectToCheckout({
-        sessionId: data.sessionId,
-      });
-
-      if (error) {
-        throw new Error(error.message);
-      }
+      window.location.href = data.url;
     } catch (error) {
       const message =
         error instanceof Error
