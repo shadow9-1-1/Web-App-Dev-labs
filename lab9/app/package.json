@@ -1,0 +1,15 @@
+{
+  "name": "lab9-app",
+  "version": "1.0.0",
+  "description": "Lab 9 Express app server",
+  "main": "server.js",
+  "type": "commonjs",
+  "scripts": {
+    "start": "node server.js",
+    "listen": "node listener.js"
+  },
+  "dependencies": {
+    "express": "^4.19.2",
+    "redis": "^4.7.0"
+  }
+}
